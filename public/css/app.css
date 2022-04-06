@@ -1,0 +1,35 @@
+body, html {
+    height: 100%;
+}
+
+body {
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background: linear-gradient(90deg, #7098e5, #eae8e5, #7098e5) no-repeat center;
+    background-size: cover;
+}
+
+.product-img-aligner {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.product-img {
+    max-width: 150px;
+    vertical-align: middle;
+    margin: auto;
+    overflow: hidden;
+}
+
+.product-img-holder {
+    vertical-align: center;
+    height: 150px;
+    margin: auto;
+}
+
+.va-middle {
+    vertical-align: middle;
+}

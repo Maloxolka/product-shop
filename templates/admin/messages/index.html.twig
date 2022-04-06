@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Messages
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <div class="row p-2">
+                <div class="col-auto my-auto">
+                    <h5>Все сообщения</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if messages is empty %}
+                Нет сообщений...
+            {% else %}
+                <div class="row my-2">
+                    <div class="col-1">#</div>
+                    <div class="col-4">Отправитель</div>
+                    <div class="col-5">Тема</div>
+                    <div class="col-2"></div>
+                </div>
+                {% for message in messages %}
+                    <div class="row my-2">
+                        <div class="col-1 my-auto">{{ loop.index }}</div>
+                        <div class="col-4 my-auto">{{ message.name }}</div>
+                        <div class="col-5 my-auto">{{ message.subject }}</div>
+                        <div class="col-2 text-end">
+                            <a class="btn btn-sm btn-danger" href="{{ path('app_admin_messages_show', {id: message.id}) }}">
+                                Просмотр
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Главная
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <div class="row p-2">
+                <div class="col-auto my-auto">
+                    <h5>Товары</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-lg-3 product-holder">
+                        <div class="card p-1">
+                            <div class="product-img-holder">
+                                <span class="product-img-aligner"></span>
+                                <img src="{{ product.file_link.url }}"
+                                     class="w-auto card-img-top product-img"
+                                     onerror="this.src = '{{ product.file_link.default }}'">
+                            </div>
+                            <div class="card-title ps-3">
+                                <div class="col my-auto product-name">
+                                    {{ product.name }}
+                                </div>
+                                <div class="col">Цена: {{ product.price.formatted }}</div>
+                            </div>
+                            <div class="card-body">
+                                <button type="button" class="btn btn-danger add-to-cart" data-id="{{ product.id }}">
+                                    Добавить в корзину
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        $('.add-to-cart').click(function () {
+            let url = '{{ path('app_cart_ajax_add', {product_id: '%product_id%'}) }}';
+            url = decodeURI(url).replace('%product_id%', $(this).attr('data-id'));
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                dataType: 'JSON',
+                success: function (data) {
+                    (new AWN).info('Товар был добавлен в корзину!');
+                }
+            })
+        });
+    </script>
+{% endblock %}

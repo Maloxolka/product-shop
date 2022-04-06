@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Оформить заказ
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <div class="row p-2">
+                <div class="col-auto my-auto">
+                    <h5>Оформление заказа</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ path('app_orders_form') }}">
+                <div class="form-group">
+                    <label for="address">Адрес доставки: </label>
+                    <input id="address"
+                           class="form-control"
+                           name="address"
+                           required>
+                </div>
+                <button class="btn btn-danger mt-2">Оформить</button>
+                <hr/>
+                <h6>
+                    Товары:
+                </h6>
+                <div class="row">
+                    <div class="col-4">Название</div>
+                    <div class="col-2">Кол-во</div>
+                    <div class="col-2">Цена</div>
+                    <div class="col-2"></div>
+                </div>
+                {% for order_product in order.order_products %}
+                    <div class="row product-row" data-id="{{ order_product.product.id }}">
+                        <div class="col-4">{{ order_product.product.name }}</div>
+                        <div class="col-2">{{ order_product.amount }}</div>
+                        <div class="col-2">{{ order_product.price.formatted }}</div>
+                        <div class="col-2">{{ order_product.total.formatted }}</div>
+                    </div>
+                {% endfor %}
+                <div class="row">
+                    <div class="col-8 text-end">Всего: </div>
+                    <div class="col-2">{{ order.total.formatted }}</div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

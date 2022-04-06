@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Все товары
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <div class="row p-2">
+                <div class="col-auto my-auto">
+                    <h5>Все товары</h5>
+                </div>
+                <div class="col text-end">
+                    <a href="{{ path('app_admin_products_create') }}" class="btn btn-danger">
+                        Создать
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-lg-4 p-1">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col my-auto">
+                                        {{ product.name }}
+                                    </div>
+                                    <div class="col-auto">
+                                        <a href="{{ path('app_admin_products_edit', {id: product.id}) }}" class="btn btn-danger">
+                                            Изменить
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-img-holder">
+                                <span class="product-img-aligner"></span>
+                                <img src="{{ product.file_link.url }}"
+                                     class="w-auto card-img-top product-img"
+                                     onerror="this.src = '{{ product.file_link.default }}'">
+                            </div>
+                            <div class="card-body">
+                                <div>На складе: {{ product.amount }}</div>
+                                <div>Цена: {{ product.price.formatted }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

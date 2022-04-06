@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Заказ
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <div class="row p-2">
+                <div class="col-auto my-auto">
+                    <h5>Заказ #{{ order.id }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if order.status.id is constant('App\\Dictionaries\\OrderStatuses\\OrderStatusDictionary::AWAITING_PAYMENT') %}
+                <div class="card bg-danger text-light">
+                    <div class="card-body">
+                        Для оплаты переведите на карту
+                        <b>0000 0000 0000 0000</b>
+                        указанную сумму с указанием номера заказа.
+                    </div>
+                </div>
+            {% endif %}
+            <br/>
+            <div>
+                <label><b>Статус:</b> </label> {{ order.status.name }}
+            </div>
+            <div>
+                <label><b>Адрес:</b> </label> {{ order.address }}
+            </div>
+            <br/>
+            <table class="table table-danger table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Название</th>
+                    <th>Цена</th>
+                    <th>Кол-во</th>
+                    <th>Всего</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for order_product in order.order_products %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ order_product.product.name }}</td>
+                        <td>{{ order_product.price.formatted }}</td>
+                        <td>{{ order_product.amount }}</td>
+                        <td>{{ order_product.total.formatted }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="4" class="text-end">Всего</td>
+                    <td>
+                        {{ order.total.formatted }}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

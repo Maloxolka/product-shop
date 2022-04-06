@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Изменить товар
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <h5 class="text-center">Изменить товар</h5>
+        </div>
+        <img src="{{ product.file_link.url }}"
+             class="w-auto"
+             onerror="this.src = '{{ product.file_link.default }}'">
+        <form action="{{ path('app_admin_products_update', {'id': product.id}) }}" method="POST" enctype="multipart/form-data">
+            <div class="card-body">
+                {% set form_settings = {file_required: false} %}
+                {% include 'admin/products/form.html.twig' %}
+            </div>
+            <div class="card-footer text-end">
+                <button class="btn btn-danger ml-auto">Сохранить</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Корзина
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <div class="row p-2">
+                <div class="col-auto my-auto">
+                    <h5>Корзина</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            {% if cart.empty %}
+                <div>Ваша корзина пуста...</div>
+            {% else %}
+                <div class="row">
+                    <div class="col-4">Название</div>
+                    <div class="col-2">Кол-во</div>
+                    <div class="col-2">Цена</div>
+                    <div class="col-2"></div>
+                </div>
+                {% for order_product in cart.order_products %}
+                    <div class="row product-row" data-id="{{ order_product.product.id }}">
+                        <div class="col-4">{{ order_product.product.name }}</div>
+                        <div class="col-2">
+                            <span class="subtract-product">
+                                <button class="btn btn-xs btn-danger" type="button">
+                                    <
+                                </button>
+                            </span>
+                            <span class="product-amount">
+                                {{ order_product.amount }}
+                        </span>
+                            <span class="add-product">
+                                <button class="btn btn-xs btn-danger" type="button">
+                                    >
+                                </button>
+                            </span>
+
+                        </div>
+                        <div class="col-2">{{ order_product.price.formatted }}</div>
+                    </div>
+                {% endfor %}
+                <div class="row">
+                    <div class="col-6 text-end">Итого: </div>
+                    <div class="col-2">{{ cart.total.formatted }}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6"></div>
+                    <div class="col-6">
+                        <a href="{{ path('app_cart_form_order') }}" class="btn btn-danger">
+                            Оформить
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        $('.add-product').click(function () {
+            let url = '{{ path('app_cart_ajax_add', {product_id: '%product_id%'}) }}';
+
+            sendCartChangeRequest(url, this)
+        });
+
+        $('.subtract-product').click(function () {
+            let url = '{{ path('app_cart_ajax_subtract', {product_id: '%product_id%'}) }}';
+
+            sendCartChangeRequest(url, this);
+        });
+
+        function sendCartChangeRequest(url, context) {
+            let product_row = $(context).parents('.product-row');
+            let product_id = product_row.attr('data-id');
+
+            url = decodeURI(url).replace('%product_id%', product_id);
+
+            $.ajax({
+                method: 'POST',
+                url: url,
+                success: function () {
+                    location.reload();
+                },
+            });
+        }
+    </script>
+{% endblock %}

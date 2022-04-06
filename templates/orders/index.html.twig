@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Заказы
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <div class="row p-2">
+                <div class="col-auto my-auto">
+                    <h5>Ваши заказы</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                {% if orders is empty %}
+                    <div class="col">
+                        У вас нет заказов...
+                    </div>
+                {% else %}
+                    {% for order in orders %}
+                        <div class="col-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col">ID: {{ order.id }}</div>
+                                        <a class="col-auto btn btn-sm btn-danger" href="{{ path('app_orders_show', {id: order.id}) }}">
+                                            Просмотр
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="card-body">
+                                    <div class="col">Статус заказа: {{ order.status.name }}</div>
+                                    <div class="col">
+                                        Цена: {{ order.total.formatted }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

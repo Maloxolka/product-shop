@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Сообщение
+{% endblock %}
+{% block body %}
+    <div class="card col-lg-10 mx-auto">
+        <div class="card-header">
+            <div class="row p-2">
+                <div class="col-auto my-auto">
+                    <h5>Сообщение от {{ message.name }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div>
+                <label>От: </label> {{ message.name }}
+            </div>
+            <div>
+                <label>Контакты: </label> {{ message.contacts }}
+            </div>
+            <div>
+                <label>Тема: </label> {{ message.subject }}
+            </div>
+            <hr/>
+            <div>
+                {{ message.body }}
+            </div>
+            {% if message.file_link.url is not null %}
+                <hr/>
+                <label>Файл</label>
+                <div>
+                    {% if message.file_link.url ends with '.pdf' %}
+                        <embed src="{{ message.file_link.url }}" height="750"
+                               class="w-100"
+                               type="application/pdf">
+                    {% else %}
+                        <img class="w-100" src="{{ message.file_link.url }}">
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
