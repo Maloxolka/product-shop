@@ -12,16 +12,6 @@
             </div>
         </div>
         <div class="card-body">
-            {% if order.status.id is constant('App\\Dictionaries\\OrderStatuses\\OrderStatusDictionary::AWAITING_PAYMENT') %}
-                <div class="card bg-danger text-light">
-                    <div class="card-body">
-                        Для оплаты переведите на карту
-                        <b>0000 0000 0000 0000</b>
-                        указанную сумму с указанием номера заказа.
-                    </div>
-                </div>
-            {% endif %}
-            <br/>
             <div>
                 <label><b>Статус:</b> </label> {{ order.status.name }}
             </div>
@@ -29,7 +19,8 @@
                 <label><b>Адрес:</b> </label> {{ order.address }}
             </div>
             <br/>
-            <table class="table table-danger table-hover table-striped">
+            <h5>Заказанные продукты</h5>
+            <table class="table">
                 <thead>
                 <tr>
                     <th>#</th>

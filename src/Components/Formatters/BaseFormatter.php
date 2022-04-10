@@ -16,7 +16,7 @@ class BaseFormatter
 
         return [
             'value' => $price_float,
-            'formatted' => $price_float . ' руб.',
+            'formatted' => $price_float . ' руб',
         ];
     }
 }

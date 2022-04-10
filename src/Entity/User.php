@@ -20,7 +20,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private int $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private string $email;
+    public string $email;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    public ?string $name;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    public ?string $surname;
 
     #[ORM\Column(type: 'json')]
     private array $roles = [];
@@ -29,7 +35,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private string $password;
 
     #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'user')]
-    private Collection $orders;
+    public Collection $orders;
 
     public function __construct()
     {
@@ -39,18 +45,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
-        return $this;
     }
 
     public function getUserIdentifier(): string

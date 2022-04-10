@@ -25,7 +25,7 @@ class RegistrationService
 
         $user = new User();
 
-        $user->setEmail($dto->email);
+        $user->email = $dto->email;
 
         $user->setPassword(
             $this->user_password_hasher->hashPassword(

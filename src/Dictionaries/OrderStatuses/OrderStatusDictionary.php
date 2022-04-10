@@ -7,7 +7,6 @@ namespace App\Dictionaries\OrderStatuses;
 class OrderStatusDictionary
 {
     public const CART = 'cart';
-    public const AWAITING_PAYMENT = 'awaiting_payment';
     public const COLLECTING = 'collecting';
     public const IN_DELIVERY = 'in_delivery';
     public const COMPLETE = 'complete';
@@ -15,7 +14,6 @@ class OrderStatusDictionary
     public function getVisibleIds(): array
     {
         return [
-            self::AWAITING_PAYMENT,
             self::COLLECTING,
             self::IN_DELIVERY,
             self::COMPLETE,
@@ -26,9 +24,8 @@ class OrderStatusDictionary
     {
         return [
             new OrderStatus(self::CART, 'Корзина'),
-            new OrderStatus(self::AWAITING_PAYMENT, 'Ожидает оплаты'),
-            new OrderStatus(self::COLLECTING, 'В процессе сборки'),
-            new OrderStatus(self::IN_DELIVERY, 'Отправлен'),
+            new OrderStatus(self::COLLECTING, 'Собирается'),
+            new OrderStatus(self::IN_DELIVERY, 'В пути'),
             new OrderStatus(self::COMPLETE, 'Доставлен'),
         ];
     }

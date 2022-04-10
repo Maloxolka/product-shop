@@ -94,5 +94,6 @@ class ProductService
         $entity->name = $dto->name;
         $entity->price = $this->fromMoneyToDbValue($dto->price_float);
         $entity->amount = $dto->amount;
+        $entity->description = $dto->description;
     }
 }

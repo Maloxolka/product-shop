@@ -59,7 +59,7 @@ class OrderService
 
         Assert::greaterThan($order->order_products->count(), 0);
 
-        $order->status = OrderStatusDictionary::AWAITING_PAYMENT;
+        $order->status = OrderStatusDictionary::COLLECTING;
         $order->address = $address;
 
         $this->updateOrderProductPrices($order);

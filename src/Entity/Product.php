@@ -18,6 +18,9 @@ class Product
     #[ORM\Column(type: 'string', length: 255)]
     public string $name;
 
+    #[ORM\Column(type: 'string', length: 1024, nullable: true)]
+    public ?string $description;
+
     #[ORM\Column(type: 'integer')]
     public int $price;
 

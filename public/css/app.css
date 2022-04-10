@@ -2,15 +2,6 @@ body, html {
     height: 100%;
 }
 
-body {
-    /* Full height */
-    height: 100%;
-
-    /* Center and scale the image nicely */
-    background: linear-gradient(90deg, #7098e5, #eae8e5, #7098e5) no-repeat center;
-    background-size: cover;
-}
-
 .product-img-aligner {
     display: inline-block;
     height: 100%;
@@ -32,4 +23,8 @@ body {
 
 .va-middle {
     vertical-align: middle;
+}
+
+.card {
+    border-radius: 10px;
 }

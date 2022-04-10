@@ -7,6 +7,13 @@
            required>
 </div>
 <div class="form-group">
+    <label for="name">Описание</label>
+    <textarea class="form-control"
+              name="description"
+    >{{ product.description ?? ''|nl2br }}</textarea>
+</div>
+
+<div class="form-group">
     <label for="amount">Осталось штук:</label>
     <input id="amount"
            class="form-control"
@@ -18,7 +25,7 @@
     <label for="price">Цена</label>
     <div class="input-group">
         <div class="input-group-prepend">
-            <div class="input-group-text">Руб. </div>
+            <div class="input-group-text">Руб </div>
         </div>
         <input id="price"
                class="form-control"

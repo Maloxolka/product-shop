@@ -28,6 +28,7 @@ class ProductFormatter extends BaseFormatter
         return [
             'id' => $product->id,
             'name' => $product->name,
+            'description' => $product->description,
             'price' => $this->formatPrice($product->price),
             'amount' => $product->amount,
             'file_link' => [

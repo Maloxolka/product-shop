@@ -12,6 +12,7 @@ class ProductDTO
 
     public function __construct(
         public string $name,
+        public string $description,
         public int $amount,
         public float $price_float,
     ) {

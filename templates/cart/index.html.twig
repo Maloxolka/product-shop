@@ -16,40 +16,39 @@
                 <div>Ваша корзина пуста...</div>
             {% else %}
                 <div class="row">
-                    <div class="col-4">Название</div>
+                    <div class="col-8">Название</div>
                     <div class="col-2">Кол-во</div>
                     <div class="col-2">Цена</div>
-                    <div class="col-2"></div>
                 </div>
                 {% for order_product in cart.order_products %}
                     <div class="row product-row" data-id="{{ order_product.product.id }}">
-                        <div class="col-4">{{ order_product.product.name }}</div>
-                        <div class="col-2">
-                            <span class="subtract-product">
-                                <button class="btn btn-xs btn-danger" type="button">
+                        <div class="col-8 my-auto">{{ order_product.product.name }}</div>
+                        <div class="col-2 va-middle">
+                            <span class="subtract-product mb-auto">
+                                <button class="btn btn-xs" type="button">
                                     <
                                 </button>
                             </span>
-                            <span class="product-amount">
+                            <span class="product-amount va-middle">
                                 {{ order_product.amount }}
                         </span>
-                            <span class="add-product">
-                                <button class="btn btn-xs btn-danger" type="button">
+                            <span class="add-product mb-auto">
+                                <button class="btn btn-xs" type="button">
                                     >
                                 </button>
                             </span>
 
                         </div>
-                        <div class="col-2">{{ order_product.price.formatted }}</div>
+                        <div class="col-2 my-auto">{{ order_product.price.formatted }}</div>
                     </div>
                 {% endfor %}
                 <div class="row">
-                    <div class="col-6 text-end">Итого: </div>
+                    <div class="col-10 text-end">Итого: </div>
                     <div class="col-2">{{ cart.total.formatted }}</div>
                 </div>
                 <div class="row">
-                    <div class="col-6"></div>
-                    <div class="col-6">
+                    <div class="col-10"></div>
+                    <div class="col-2">
                         <a href="{{ path('app_cart_form_order') }}" class="btn btn-danger">
                             Оформить
                         </a>

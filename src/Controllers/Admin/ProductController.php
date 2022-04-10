@@ -46,6 +46,7 @@ class ProductController extends AbstractController
     {
         $product_dto = new ProductDTO(
             $request->getString('name'),
+            $request->getString('description'),
             $request->getInt('amount'),
             $request->getFloat('price'),
         );
@@ -75,6 +76,7 @@ class ProductController extends AbstractController
     {
         $product_dto = new ProductDTO(
             $request->getString('name'),
+            $request->getString('description'),
             $request->getInt('amount'),
             $request->getFloat('price'),
         );
@@ -84,9 +86,6 @@ class ProductController extends AbstractController
         try {
             $service->store($product_dto);
         } catch (ValidationFailedException $e) {
-            var_dump($e->getMessage());
-            exit();
-
             return $this->redirectToRoute('app_admin_products_create');
         }
 

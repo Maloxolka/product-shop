@@ -16,6 +16,10 @@
                 {% for product in products %}
                     <div class="col-lg-3 product-holder">
                         <div class="card p-1">
+                            <div class="card-header product-name">
+                                <b>{{ product.name }}</b>
+
+                            </div>
                             <div class="product-img-holder">
                                 <span class="product-img-aligner"></span>
                                 <img src="{{ product.file_link.url }}"
@@ -23,8 +27,8 @@
                                      onerror="this.src = '{{ product.file_link.default }}'">
                             </div>
                             <div class="card-title ps-3">
-                                <div class="col my-auto product-name">
-                                    {{ product.name }}
+                                <div class="col my-auto ">
+                                    {{ product.description|nl2br }}
                                 </div>
                                 <div class="col">Цена: {{ product.price.formatted }}</div>
                             </div>
@@ -49,7 +53,7 @@
                 url: url,
                 dataType: 'JSON',
                 success: function (data) {
-                    (new AWN).info('Товар был добавлен в корзину!');
+                    toastr.success('Товар был добавлен в корзину!');
                 }
             })
         });
